@@ -27,7 +27,6 @@ int MovingTime_C = 0;
 int MovingTime_D = 0;
 int MovingTime_E = 0;
 int MovingTime_F = 0;
-int WaitCheck_A = 0;
 int WaitTime = 0;
 int Commed = 0;
 char receivedData[50];
@@ -42,7 +41,7 @@ Servo servo_F;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("1");
+  Serial.println("START");
 
   Servo_on();
 
@@ -69,7 +68,8 @@ void loop() {
     Serial.println("Commed:" + String(Commed));
   
     if (Commed == 0) {
-      Serial.println("Commed == 0");
+      //Serial.println("Commed == 0");
+      
       //int CurrentPosition_A = servo_A.read();  //讀取伺服馬達的當前位置
       int CurrentPosition_A = LastPos[0];
       moveToTargetPosition_A(CurrentPosition_A, Position_A, StepSize);
@@ -96,6 +96,8 @@ void loop() {
       }
     
     else if (Commed == 1) {
+      //Serial.println("Commed == 1");
+      
       //int CurrentPosition_A = servo_A.read();  //讀取伺服馬達的當前位置
       int CurrentPosition_A = LastPos[0];
       moveToTargetPosition_A(CurrentPosition_A, Position_A, StepSize);
@@ -138,6 +140,8 @@ void loop() {
       WriteAddress++;
       }
     else if (Commed == 2 && WriteAddress > 0) {
+        //Serial.println("Commed == 2");
+        
         for (int i = 0; i < WriteAddress; i++) {
           ReadAddress = i;
           //int CurrentPosition_A = servo_A.read();  //讀取伺服馬達的當前位置
@@ -173,7 +177,8 @@ void loop() {
           Serial.print("D:" + String(PosSave [ReadAddress][0]) + " ");
           Serial.print("E:" + String(PosSave [ReadAddress][0]) + " ");
           Serial.print("F:" + String(PosSave [ReadAddress][0]) + " ");
-          Serial.println("WaitTime:" + String(WaitTime));
+          Serial.println("WaitTime:" + String(WaitTime) + "+" + String(StepTime));
+          WaitTime = WaitTime + StepTime;
           delay(WaitTime);
           }
         ReadAddress = 0;
