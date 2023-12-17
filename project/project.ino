@@ -86,7 +86,6 @@ void loop() {
 
   //普通模式，移動至指定位置
   if (Commed == 0) {
-    //Serial.println("Commed == 0");  //在序列埠輸出[Commed == 0]
 
     int CurrentPosition_A = LastPos[0];  //讀取伺服馬達A的當前位置
     moveToTargetPosition_A(CurrentPosition_A, Position_A, StepSize);  //呼叫伺服馬達A的副函式
@@ -109,7 +108,6 @@ void loop() {
   
   //寫入模式，移動至指定位置並寫入至陣列儲存
   else if (Commed == 1) {
-    //Serial.println("Commed == 1");  //在序列埠輸出[Commed == 1]
 
     int CurrentPosition_A = LastPos[0];  //讀取伺服馬達A的當前位置
     moveToTargetPosition_A(CurrentPosition_A, Position_A, StepSize);  //呼叫伺服馬達A的副函式
@@ -135,22 +133,12 @@ void loop() {
     PosSave [WriteAddress][3] = Position_D;  //將伺服馬達D的位置寫入至該行的第四個元素中
     PosSave [WriteAddress][4] = Position_E;  //將伺服馬達E的位置寫入至該行的第五個元素中
     PosSave [WriteAddress][5] = Position_F;  //將伺服馬達F的位置寫入至該行的第六個元素中
-    /*
-    Serial.print("Write_Address: " + String(WriteAddress) + " ");  //在序列埠輸出[Write_Address: (WriteAddress) ]
-    Serial.print("A:" + String(Position_A) + " ");  //在序列埠輸出[A:(Position_A) ]
-    Serial.print("B:" + String(Position_B) + " ");  //在序列埠輸出[B:(Position_B) ]
-    Serial.print("C:" + String(Position_C) + " ");  //在序列埠輸出[C:(Position_C) ]
-    Serial.print("D:" + String(Position_D) + " ");  //在序列埠輸出[D:(Position_D) ]
-    Serial.print("E:" + String(Position_E) + " ");  //在序列埠輸出[E:(Position_E) ]
-    Serial.println("F:" + String(Position_F) + " ");  //在序列埠輸出[F:(Position_F) ]並換行
-    */
     Commed = 0;  //指定 Commed 為零，以回復至普通模式
     WriteAddress++;  //寫入位置加一，以便下次的寫入
   }
 
   //讀取模式，讀取陣列中所儲存的位置並按照順序進行移動
   else if (Commed == 2 && WriteAddress > 0) {
-    //Serial.println("Commed == 2");  //在序列埠輸出[Commed == 2]
     
     //WaitCheck 等於零表示有伺服馬達尚未移動至指定位置，將重復執行執直至 WaitCheck 等於一
     if (WaitCheck == 0) {
@@ -171,23 +159,11 @@ void loop() {
 
     int CurrentPosition_F = LastPos[5];  //讀取伺服馬達F的當前位置
     MovingTime_F = moveToTargetPosition_F(CurrentPosition_F, PosSave [ReadAddress][5], StepSize);  //呼叫伺服馬達F的副函式，並讀取其回傳的值
-    /*
-    Serial.print("Read_Address: " + String(ReadAddress) + " ");  //在序列埠輸出[Read_Address: (ReadAddress) ]
-    Serial.print("A:" + String(PosSave [ReadAddress][0]) + " ");  //在序列埠輸出[A:(PosSave [ReadAddress][0]) ]
-    Serial.print("B:" + String(PosSave [ReadAddress][1]) + " ");  //在序列埠輸出[B:(PosSave [ReadAddress][1]) ]
-    Serial.print("C:" + String(PosSave [ReadAddress][2]) + " ");  //在序列埠輸出[C:(PosSave [ReadAddress][2]) ]
-    Serial.print("D:" + String(PosSave [ReadAddress][3]) + " ");  //在序列埠輸出[D:(PosSave [ReadAddress][3]) ]
-    Serial.print("E:" + String(PosSave [ReadAddress][4]) + " ");  //在序列埠輸出[E:(PosSave [ReadAddress][4]) ]
-    Serial.print("F:" + String(PosSave [ReadAddress][5]) + " ");  //在序列埠輸出[F:(PosSave [ReadAddress][5]) ]
-    Serial.println("Check:" + String(WaitCheck));  //在序列埠輸出[Check:(WaitCheck)]並換行
-    */
     }
 
     //判斷各伺服馬達的副函式的回傳值是否皆等於零，有值不等於零表示有伺服馬達尚未移動至指定位置
     if (MovingTime_A == 0 && MovingTime_B == 0 && MovingTime_C == 0 && MovingTime_D == 0 && MovingTime_E == 0 && MovingTime_F == 0) {
     WaitCheck = 1;  //如果各伺服馬達的副函式的回傳值皆等於零，指定 WaitCheck 為一
-
-    //Serial.println("NEXT");  //在序列埠輸出[NEXT]並換行
     }
     
    //判斷各伺服馬達至否移動至指定位，並確定將要讀取的位置是否小於目前的寫入地址
@@ -195,8 +171,6 @@ void loop() {
       ReadAddress = ReadAddress + 1;  //將 ReadAddress 加一，以便讀去下一組位置
       delay(StepTime);  //等待設定的時間
       WaitCheck = 0;  //指定 WaitCheck 為零，以開啟下一輪位置讀取
-
-      //Serial.println("NEXT_POS");  //在序列埠輸出[NEXT_POS]並換行
     }
     
     //判斷各伺服馬達至否移動至指定位，並確定將要讀取的位置是否大於等於目前的寫入地址
@@ -204,8 +178,6 @@ void loop() {
       ReadAddress = 0;  //指定 ReadAddress 為零
       WaitCheck = 0;  //指定 WaitCheck 為零，以開啟下一輪位置讀取
       Commed = 0;   //指定 Commed 為零，以回復至普通模式
-      
-      //Serial.println("FINISH");  //在序列埠輸出[FUNISH]並換行
     }
   }  
 }
@@ -239,8 +211,7 @@ void Set_Servo(int Position_A, int Position_B, int Position_C, int Position_D, i
 
 //副函式，控制伺服馬達A的移動
 int moveToTargetPosition_A(int CurrentPosition, int TargetPosition, int StepSize) {
-  //Serial.print("A ");  //
-在序列埠輸出[A ]
+  
   int Moving = CurrentPosition - TargetPosition;
   Moving = abs(Moving);
   Moving = Moving * Moving_delay;
@@ -251,16 +222,6 @@ int moveToTargetPosition_A(int CurrentPosition, int TargetPosition, int StepSize
     servo_A.write(TOGO);  //逼近目標位置
     LastPos[0] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("F ");  //在序列埠輸出[F ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
   
   else if (CurrentPosition > TargetPosition) {
@@ -268,34 +229,16 @@ int moveToTargetPosition_A(int CurrentPosition, int TargetPosition, int StepSize
     servo_A.write(TOGO);  //逼近目標位置
     LastPos[0] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("R ");  //在序列埠輸出[R ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
 
   else if (CurrentPosition == TargetPosition && Moving ==0) {
-    /*
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
+
   }
   return Moving;
 }
 
 //副函式，控制伺服馬達B的移動
 int moveToTargetPosition_B(int CurrentPosition, int TargetPosition, int StepSize) {
-  //Serial.print("B ");  //在序列埠輸出[B ]
 
   int Moving = CurrentPosition - TargetPosition;
   Moving = abs(Moving);
@@ -307,16 +250,6 @@ int moveToTargetPosition_B(int CurrentPosition, int TargetPosition, int StepSize
     servo_B.write(TOGO);  //逼近目標位置
     LastPos[1] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("F ");  //在序列埠輸出[F ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
   
   else if (CurrentPosition > TargetPosition) {
@@ -324,34 +257,16 @@ int moveToTargetPosition_B(int CurrentPosition, int TargetPosition, int StepSize
     servo_B.write(TOGO);  //逼近目標位置
     LastPos[1] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("R ");  //在序列埠輸出[R ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
   
   else if (CurrentPosition == TargetPosition && Moving ==0) {
-    /*
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
+
   }
   return Moving;
 }
 
 //副函式，控制伺服馬達C的移動
 int moveToTargetPosition_C(int CurrentPosition, int TargetPosition, int StepSize) {
-  //Serial.print("C ");  //在序列埠輸出[C ]
   
   int Moving = CurrentPosition - TargetPosition;
   Moving = abs(Moving);
@@ -363,16 +278,6 @@ int moveToTargetPosition_C(int CurrentPosition, int TargetPosition, int StepSize
     servo_C.write(TOGO);  //逼近目標位置
     LastPos[2] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("F ");  //在序列埠輸出[F ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
 
   else if (CurrentPosition > TargetPosition) {
@@ -380,34 +285,16 @@ int moveToTargetPosition_C(int CurrentPosition, int TargetPosition, int StepSize
     servo_C.write(TOGO);  //逼近目標位置
     LastPos[2] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("R ");  //在序列埠輸出[R ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
 
   else if (CurrentPosition == TargetPosition && Moving ==0) {
-    /*
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
+    
   }
   return Moving;
 }
 
 //副函式，控制伺服馬達D的移動
 int moveToTargetPosition_D(int CurrentPosition, int TargetPosition, int StepSize) {
-  //Serial.print("D ");  //在序列埠輸出[D ]
   
   int Moving = CurrentPosition - TargetPosition;
   Moving = abs(Moving);
@@ -419,16 +306,6 @@ int moveToTargetPosition_D(int CurrentPosition, int TargetPosition, int StepSize
     servo_D.write(TOGO);  //逼近目標位置
     LastPos[3] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("F ");  //在序列埠輸出[F ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
   
   else if (CurrentPosition > TargetPosition) {
@@ -436,34 +313,16 @@ int moveToTargetPosition_D(int CurrentPosition, int TargetPosition, int StepSize
     servo_D.write(TOGO);  //逼近目標位置
     LastPos[3] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("R ");  //在序列埠輸出[R ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
   
   else if (CurrentPosition == TargetPosition && Moving ==0) {
-    /*
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
+    
   }
   return Moving;
 }
 
 //副函式，控制伺服馬達E的移動
 int moveToTargetPosition_E(int CurrentPosition, int TargetPosition, int StepSize) {
-  //Serial.print("E ");  //在序列埠輸出[E ]
   
   int Moving = CurrentPosition - TargetPosition;
   Moving = abs(Moving);
@@ -475,16 +334,6 @@ int moveToTargetPosition_E(int CurrentPosition, int TargetPosition, int StepSize
     servo_E.write(TOGO);  //逼近目標位置
     LastPos[4] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("F ");  //在序列埠輸出[F ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
   
   else if (CurrentPosition > TargetPosition) {
@@ -492,34 +341,16 @@ int moveToTargetPosition_E(int CurrentPosition, int TargetPosition, int StepSize
     servo_E.write(TOGO);  //逼近目標位置
     LastPos[4] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("R ");  //在序列埠輸出[R ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
   }
 
   else if (CurrentPosition == TargetPosition && Moving ==0) {
-    /*
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(Moving);  //在序列埠輸出[(Moving)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    */
+
   }
   return Moving;
 }
 
 //副函式，控制伺服馬達F的移動
 int moveToTargetPosition_F(int CurrentPosition, int TargetPosition, int StepSize) {
-  //Serial.print("F ");  //在序列埠輸出[F ]
   
   int Moving = CurrentPosition - TargetPosition;
   Moving = abs(Moving);
@@ -531,15 +362,6 @@ int moveToTargetPosition_F(int CurrentPosition, int TargetPosition, int StepSize
     servo_F.write(TOGO);  //逼近目標位置
     LastPos[5] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    
-    /*
-    Serial.print("F ");  //在序列埠輸出[F ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.println(Moving);  //在序列埠輸出[(Moving)]並換行
-    */
   }
   
   else if (CurrentPosition > TargetPosition) {
@@ -547,24 +369,10 @@ int moveToTargetPosition_F(int CurrentPosition, int TargetPosition, int StepSize
     servo_F.write(TOGO);  //逼近目標位置
     LastPos[5] = TOGO;
     delay(Moving_delay);  //可選的延遲，以控制移動速度
-    /*
-    Serial.print("R ");  //在序列埠輸出[R ]
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.println(Moving);  //在序列埠輸出[(Moving)]
-    */
   }
   
   else if (CurrentPosition == TargetPosition && Moving ==0) {
-    /*
-    Serial.print(CurrentPosition);  //在序列埠輸出[(CurrentPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.print(TargetPosition);  //在序列埠輸出[(TargetPosition)]
-    Serial.print(" ");  //在序列埠輸出[ ]
-    Serial.println(Moving);  //在序列埠輸出[(Moving)]
-    */
+    
   }
   return Moving;
 }
