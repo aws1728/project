@@ -1,0 +1,844 @@
+[
+    {
+        "id": "bed6db02e8b8fd04",
+        "type": "tab",
+        "label": "流程1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2c3ba4572cb5adf9",
+        "type": "ui_slider",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "label": "Pos_A",
+        "tooltip": "",
+        "group": "29247af90ad69e8b",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "sliderA",
+        "topicType": "str",
+        "min": 0,
+        "max": "180",
+        "step": 1,
+        "className": "",
+        "x": 530,
+        "y": 60,
+        "wires": [
+            [
+                "220da7d9909d8e5d",
+                "82dd71c1c6639132"
+            ]
+        ]
+    },
+    {
+        "id": "4f12554213e9f0a8",
+        "type": "ui_slider",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "label": "Pos_B",
+        "tooltip": "",
+        "group": "29247af90ad69e8b",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "sliderB",
+        "topicType": "str",
+        "min": 0,
+        "max": "180",
+        "step": 1,
+        "className": "",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "220da7d9909d8e5d",
+                "11e897fb9b747cc0"
+            ]
+        ]
+    },
+    {
+        "id": "049039c7119e177d",
+        "type": "ui_slider",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "label": "Pos_C",
+        "tooltip": "",
+        "group": "29247af90ad69e8b",
+        "order": 5,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "sliderC",
+        "topicType": "str",
+        "min": 0,
+        "max": "180",
+        "step": 1,
+        "className": "",
+        "x": 530,
+        "y": 180,
+        "wires": [
+            [
+                "220da7d9909d8e5d",
+                "09b7c369473c73bf"
+            ]
+        ]
+    },
+    {
+        "id": "03c34f084ab72567",
+        "type": "ui_slider",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "label": "Pos_D",
+        "tooltip": "",
+        "group": "29247af90ad69e8b",
+        "order": 7,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "sliderD",
+        "topicType": "str",
+        "min": 0,
+        "max": "180",
+        "step": 1,
+        "className": "",
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "220da7d9909d8e5d",
+                "c05f11eb2be5bf1c"
+            ]
+        ]
+    },
+    {
+        "id": "edf4786a5d6e26ab",
+        "type": "ui_slider",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "label": "Pos_E",
+        "tooltip": "",
+        "group": "29247af90ad69e8b",
+        "order": 9,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "sliderE",
+        "topicType": "str",
+        "min": 0,
+        "max": "180",
+        "step": 1,
+        "className": "",
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "220da7d9909d8e5d",
+                "6a131e6979d1d805"
+            ]
+        ]
+    },
+    {
+        "id": "de243099eedcd9e4",
+        "type": "ui_slider",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "label": "Pos_F",
+        "tooltip": "",
+        "group": "29247af90ad69e8b",
+        "order": 11,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "end",
+        "topic": "sliderF",
+        "topicType": "str",
+        "min": "55",
+        "max": "125",
+        "step": 1,
+        "className": "",
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "220da7d9909d8e5d",
+                "5849164885b96525"
+            ]
+        ]
+    },
+    {
+        "id": "0fbbb3270b8dd4d4",
+        "type": "serial out",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "serial": "78b501534c523855",
+        "x": 930,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "220da7d9909d8e5d",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function output",
+        "func": "if (msg.topic === \"sliderA\") {\n    global.set('sliderValueA', msg.payload)\n}\n\nif (msg.topic === \"sliderB\") {\n    global.set('sliderValueB', msg.payload)\n}\n\nif (msg.topic === \"sliderC\") {\n    global.set('sliderValueC', msg.payload)\n}\n\nif (msg.topic === \"sliderD\") {\n    global.set('sliderValueD', msg.payload)\n}\n\nif (msg.topic === \"sliderE\") {\n    global.set('sliderValueE', msg.payload)\n}\n\nif (msg.topic === \"sliderF\") {\n    global.set('sliderValueF', msg.payload)\n}\n\nif (msg.topic === \"Record\") {\n    global.set('commed', 1)\n}\n\nif (msg.topic === \"Play\") {\n    global.set('commed', 2)\n}\n\nif (msg.topic === \"ON\") {\n    global.set('Relay', 1)\n}\n\nif (msg.topic === \"OFF\") {\n    global.set('Relay', 0)\n}\n\n// 輸入的六個滑動條值\nvar dataA = global.get('sliderValueA');\nvar dataB = global.get('sliderValueB');\nvar dataC = global.get('sliderValueC');\nvar dataD = global.get('sliderValueD');\nvar dataE = global.get('sliderValueE');\nvar dataF = global.get('sliderValueF');\nvar dataCommed = global.get('commed');\nvar dataRelay = global.get('Relay');\n\n// 格式化数据为逗号分隔的字符串\nvar formattedData = dataA + \",\" + dataB + \",\" + dataC + \",\" + dataD + \",\" + dataE + \",\" + dataF + \",\" + dataCommed+ \",\" + dataRelay;\n\n// 将格式化后的数据设置为串口节点的payload\nmsg.payload = formattedData;\nif (dataCommed != 0) {\n    global.set('commed', 0)\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 420,
+        "wires": [
+            [
+                "0fbbb3270b8dd4d4",
+                "905863539b26d211"
+            ]
+        ]
+    },
+    {
+        "id": "82dd71c1c6639132",
+        "type": "ui_gauge",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 1,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pos_A",
+        "label": "Degree",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "11e897fb9b747cc0",
+        "type": "ui_gauge",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pos_B",
+        "label": "Degree",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "09b7c369473c73bf",
+        "type": "ui_gauge",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pos_C",
+        "label": "Degree",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c05f11eb2be5bf1c",
+        "type": "ui_gauge",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pos_D",
+        "label": "Degree",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6a131e6979d1d805",
+        "type": "ui_gauge",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 5,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pos_E",
+        "label": "Degree",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5849164885b96525",
+        "type": "ui_gauge",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Pos_F",
+        "label": "Degree",
+        "format": "{{value}}",
+        "min": "55",
+        "max": "125",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "905863539b26d211",
+        "type": "debug",
+        "z": "bed6db02e8b8fd04",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0302f8ad7ceca4c5",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function_A",
+        "func": "if (msg.topic === \"set_sliders\") {\n    // 设置六个不同的值\n    var values = 90\n\n    // 将这些值分别设置到六个滑块\n    msg.payload = values;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "2c3ba4572cb5adf9"
+            ]
+        ]
+    },
+    {
+        "id": "1f2ac7d0d97345bb",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function_B",
+        "func": "if (msg.topic === \"set_sliders\") {\n    // 设置六个不同的值\n    var values = 0\n\n    // 将这些值分别设置到六个滑块\n    msg.payload = values;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "4f12554213e9f0a8"
+            ]
+        ]
+    },
+    {
+        "id": "9c9e41b637da1293",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function_C",
+        "func": "if (msg.topic === \"set_sliders\") {\n    // 设置六个不同的值\n    var values = 180\n\n    // 将这些值分别设置到六个滑块\n    msg.payload = values;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 180,
+        "wires": [
+            [
+                "049039c7119e177d"
+            ]
+        ]
+    },
+    {
+        "id": "8dd68e1480e5a8cb",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function_D",
+        "func": "if (msg.topic === \"set_sliders\") {\n    // 设置六个不同的值\n    var values = 0\n\n    // 将这些值分别设置到六个滑块\n    msg.payload = values;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "03c34f084ab72567"
+            ]
+        ]
+    },
+    {
+        "id": "656fd33f2f9087dd",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function_E",
+        "func": "if (msg.topic === \"set_sliders\") {\n    // 设置六个不同的值\n    var values = 90\n\n    // 将这些值分别设置到六个滑块\n    msg.payload = values;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "edf4786a5d6e26ab"
+            ]
+        ]
+    },
+    {
+        "id": "29c4e4d852691012",
+        "type": "function",
+        "z": "bed6db02e8b8fd04",
+        "name": "function_F",
+        "func": "if (msg.topic === \"set_sliders\") {\n    // 设置六个不同的值\n    var values = 90\n\n    // 将这些值分别设置到六个滑块\n    msg.payload = values;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "de243099eedcd9e4"
+            ]
+        ]
+    },
+    {
+        "id": "1964de67c17ff080",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "Reset_A",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "set_sliders",
+        "topicType": "str",
+        "x": 240,
+        "y": 60,
+        "wires": [
+            [
+                "0302f8ad7ceca4c5"
+            ]
+        ]
+    },
+    {
+        "id": "58adb4c7ca711630",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "Reset_B",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "set_sliders",
+        "topicType": "str",
+        "x": 240,
+        "y": 120,
+        "wires": [
+            [
+                "1f2ac7d0d97345bb"
+            ]
+        ]
+    },
+    {
+        "id": "526fd97e1ecf7670",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 6,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "Reset_C",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "set_sliders",
+        "topicType": "str",
+        "x": 240,
+        "y": 180,
+        "wires": [
+            [
+                "9c9e41b637da1293"
+            ]
+        ]
+    },
+    {
+        "id": "3aa027672596fdbd",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 8,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "Reset_D",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "set_sliders",
+        "topicType": "str",
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "8dd68e1480e5a8cb"
+            ]
+        ]
+    },
+    {
+        "id": "3357b5a7d143ee9d",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 10,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "Reset_E",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "set_sliders",
+        "topicType": "str",
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "656fd33f2f9087dd"
+            ]
+        ]
+    },
+    {
+        "id": "455cac3d11786d39",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 12,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "label": "Reset_F",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "set_sliders",
+        "topicType": "str",
+        "x": 240,
+        "y": 360,
+        "wires": [
+            [
+                "29c4e4d852691012"
+            ]
+        ]
+    },
+    {
+        "id": "33fce2a8e5d93774",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 12,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "label": "Record",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "Record",
+        "topicType": "str",
+        "x": 240,
+        "y": 420,
+        "wires": [
+            [
+                "220da7d9909d8e5d"
+            ]
+        ]
+    },
+    {
+        "id": "402153bb38c26549",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "29247af90ad69e8b",
+        "order": 13,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "label": "Play",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "Play",
+        "topicType": "str",
+        "x": 230,
+        "y": 460,
+        "wires": [
+            [
+                "220da7d9909d8e5d"
+            ]
+        ]
+    },
+    {
+        "id": "9f0d29ef84e74698",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 12,
+        "width": "5",
+        "height": "1",
+        "passthru": false,
+        "label": "Relay_ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "ON",
+        "topicType": "str",
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "220da7d9909d8e5d"
+            ]
+        ]
+    },
+    {
+        "id": "110f5d95f4eee4ad",
+        "type": "ui_button",
+        "z": "bed6db02e8b8fd04",
+        "name": "",
+        "group": "851904cbe061ae14",
+        "order": 12,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "label": "Relay_OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "OFF",
+        "topicType": "str",
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "220da7d9909d8e5d"
+            ]
+        ]
+    },
+    {
+        "id": "29247af90ad69e8b",
+        "type": "ui_group",
+        "name": "Ctrl",
+        "tab": "482b17a108e42a37",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "78b501534c523855",
+        "type": "serial-port",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "851904cbe061ae14",
+        "type": "ui_group",
+        "name": "Screem",
+        "tab": "482b17a108e42a37",
+        "order": 2,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "482b17a108e42a37",
+        "type": "ui_tab",
+        "name": "Progrem",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
